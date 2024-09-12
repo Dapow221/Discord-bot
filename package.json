@@ -10,9 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@shyft-to/js": "^0.2.40",
+    "@solana/web3.js": "^1.95.3",
+    "@types/ws": "^8.5.12",
+    "axios": "^1.7.4",
     "discord.js": "^14.15.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "install": "^0.13.0",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.7.0",
+    "ws": "^8.18.0"
   },
-  "devDependencies": {},
   "description": ""
 }
