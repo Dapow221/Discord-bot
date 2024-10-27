@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const { initializeWebSocket, addWalletToTrack } = require('./commands/server/websocket');
+const { initializeWebSocket, addWalletToTrack, closeWebSocket } = require('./commands/server/websocket');
 
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -12,6 +12,7 @@ client.login(token);
 initializeWebSocket(client);
 
 client.addWalletToTrack = addWalletToTrack;
+client.closeWebSocket = closeWebSocket;
 
 client.once(Events.ClientReady, readyClient => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
@@ -26,7 +27,6 @@ for (const folder of commandFolders) {
     for (const file of commandFiles) {
         const filePath = path.join(commandsPath, file);
         const command = require(filePath);
-        // Set a new item in the Collection with the key as the command name and the value as the exported module
         if ('data' in command && 'execute' in command) {
             client.commands.set(command.data.name, command);
         } else {
